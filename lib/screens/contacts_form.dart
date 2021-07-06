@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/database/app_database.dart';
+import 'package:myapp/database/dao/conatct_dao.dart';
 import 'package:myapp/models/contact.dart';
 
 class ContactsForm extends StatefulWidget {
@@ -12,6 +12,7 @@ class _ContactsFormState extends State<ContactsForm> {
 
   final TextEditingController _accountNumberController =
       TextEditingController();
+  final ContactDao _dao = ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _ContactsFormState extends State<ContactsForm> {
                     final int accountNumber =
                         int.parse(_accountNumberController.text);
                     final Contact newContact = Contact(0, name, accountNumber);
-                    save(newContact)
+                    _dao.save(newContact)
                         .then((id) => Navigator.pop(context));
                   },
                 ),
